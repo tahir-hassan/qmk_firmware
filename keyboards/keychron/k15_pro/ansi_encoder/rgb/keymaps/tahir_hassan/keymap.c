@@ -14,6 +14,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "k15_pro.h"
+#include "action_layer.h"
+#include "color.h"
+#include "encoder.h"
+#include "rgb_matrix.h"
+#include "keycodes.h"
+
+
+
 #include QMK_KEYBOARD_H
 
 enum layers{
@@ -23,6 +32,10 @@ enum layers{
     TAHIR_FN,
     TAHIR_UDLR
 };
+
+#ifndef LAYOUT_90_ansi
+#define LAYOUT_90_ansi(...) { __VA_ARGS__ }
+#endif
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -69,6 +82,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #if defined(ENCODER_MAP_ENABLE)
+
+// NOLINTNEXTLINE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [WIN_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [WIN_FN]   = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
@@ -77,3 +92,14 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [TAHIR_UDLR]   = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
 };
 #endif // ENCODER_MAP_ENABLE
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
+{
+    if (layer_state_is(TAHIR_UDLR)) {
+        for (int i = 54; i <= 57; ++i) {
+            rgb_matrix_set_color(i, RGB_WHITE);
+        }
+    }
+
+    return false;
+}
