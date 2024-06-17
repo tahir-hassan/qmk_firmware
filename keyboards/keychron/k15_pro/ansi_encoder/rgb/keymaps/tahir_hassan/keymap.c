@@ -20,9 +20,6 @@
 #include "encoder.h"
 #include "rgb_matrix.h"
 #include "keycodes.h"
-#include "led_matrix.h"
-
-
 
 #include QMK_KEYBOARD_H
 
