@@ -38,6 +38,21 @@ enum layers{
 #define LAYOUT_90_ansi(...) { __VA_ARGS__ }
 #endif
 
+
+#define __ 255
+
+const uint8_t led_matrix[MATRIX_ROWS][MATRIX_COLS] =
+    {
+        // Key Matrix to LED Index
+        { __,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14 },
+        { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 },
+        { 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46 },
+        { 47, 48, 49, 50, 51, 52, 53, __, 54, 55, 56, 57, 58, 59, 60, 61 },
+        { 62, 63, __, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, },
+        { 77, 78, 79, __, 80, __, 81, 82, __, 83, 84, 85, __, 86, 87, 88 },
+    };
+
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -99,7 +114,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         int start = led_matrix[3][8];
         int end = led_matrix[3][11];
         for (int i = start; i <= end; ++i) {
-            
             rgb_matrix_set_color(i, RGB_WHITE);
         }
     }
