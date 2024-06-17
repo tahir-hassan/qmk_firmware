@@ -20,6 +20,7 @@
 #include "encoder.h"
 #include "rgb_matrix.h"
 #include "keycodes.h"
+#include "led_matrix.h"
 
 
 
@@ -93,10 +94,12 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 };
 #endif // ENCODER_MAP_ENABLE
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
-{
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (layer_state_is(TAHIR_UDLR)) {
-        for (int i = 54; i <= 57; ++i) {
+        int start = led_matrix[3][8];
+        int end = led_matrix[3][11];
+        for (int i = start; i <= end; ++i) {
+            
             rgb_matrix_set_color(i, RGB_WHITE);
         }
     }
