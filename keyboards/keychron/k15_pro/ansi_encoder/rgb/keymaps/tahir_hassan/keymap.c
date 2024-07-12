@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [TAHIR_FN] = LAYOUT_90_ansi(
         RGB_TOG,  /*_*/      KC_TRNS,         KC_NO,    KC_NO,    KC_NO,        KC_NO,       KC_NO,   /**/    KC_NO,      /*|*/      KC_MPRV,  KC_MPLY,   KC_MNXT,  KC_NO,    KC_NO,    KC_NO,    KC_TRNS,   KC_NO,
         KC_TRNS,  /*_*/      KC_TRNS,         BT_HST1,  BT_HST2,  BT_HST3,      KC_TRNS,     KC_TRNS, /**/    KC_TRNS,    /*|*/      KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,
-        KC_TRNS,  /*_*/      KC_NO,           RGB_MOD,  RGB_HUI,  RGB_SAI,      RGB_SPI,     KC_NO,   /*|*/   /**/        KC_TRNS,   KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,
+        KC_TRNS,  /*_*/      KC_NO,           RGB_MOD,  RGB_HUI,  RGB_SAI,      RGB_SPI,     KC_NO,   /*|*/   /**/        KC_TRNS,   KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_PSCR,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,
         KC_TRNS,  /*_*/      KC_CAPS,         KC_NO,    KC_NO,    KC_NO,        KC_NO,       KC_NO,   /*|*/   /**/        KC_TRNS,   KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  /*_*/      KC_TRNS,
         KC_TRNS,  /*_*/      KC_TRNS,         KC_TRNS,  KC_TRNS,  KC_TRNS,      KC_TRNS,     KC_NO,   /*|*/   BAT_LVL,    NK_TOGG,   KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  /*_*/
         KC_TRNS,  KC_TRNS,   KC_TRNS,         /*_*/     KC_TRNS,  KC_TRNS,      /*>*/        KC_TRNS, /*|*/   KC_TRNS,    /*>*/      KC_TRNS,  KC_TRNS,   /*_*/     /*_*/     KC_TRNS,  KC_TRNS,  KC_TRNS),
