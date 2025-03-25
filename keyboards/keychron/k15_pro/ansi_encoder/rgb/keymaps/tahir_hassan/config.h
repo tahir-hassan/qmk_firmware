@@ -1,8 +1,14 @@
 #pragma once
 
-#define AUTO_SHIFT_TIMEOUT 200
-#define AUTO_SHIFT_TIMEOUT_PER_KEY
-#define TAPPING_TERM 200
+#define ONESHOT_TAP_TOGGLE 3
+#define ONESHOT_TIMEOUT 300
+
+// Mouse key speed and acceleration.
+#define MOUSEKEY_DELAY          0
+#define MOUSEKEY_INTERVAL       16
+#define MOUSEKEY_WHEEL_DELAY    0
+#define MOUSEKEY_MAX_SPEED      6
+#define MOUSEKEY_TIME_TO_MAX    64
 
 #undef ENABLE_RGB_MATRIX_BAND_SPIRAL_VAL
 #undef ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
