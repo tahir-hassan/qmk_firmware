@@ -46,6 +46,14 @@ enum layers{
 #define TO_BASE TO(TAHIR_BASE)
 #define TO_MOUSE TO(TAHIR_MOUSE)
 
+
+enum custom_keycodes {
+    KC_MS_UL = SAFE_RANGE,
+    KC_MS_UR,
+    KC_MS_DL,
+    KC_MS_DR,
+};
+
 const uint8_t led_matrix[MATRIX_ROWS][MATRIX_COLS] =
     {
         // Key Matrix to LED Index
@@ -105,9 +113,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [TAHIR_MOUSE] = LAYOUT_90_ansi(
         KC_NO,    /*_*/      KC_NO,           KC_NO,    KC_NO,         KC_NO,         KC_NO,          KC_NO,       /**/    KC_NO,      /*|*/      KC_NO,    KC_NO,     KC_NO,    KC_NO,      KC_NO,    KC_NO,    KC_NO,     KC_NO,
         MC_1,     /*_*/      KC_NO,           MS_A1,    MS_A2,         MS_A3,         KC_NO,          KC_NO,       /**/    KC_NO,      /*|*/      KC_NO,    KC_NO,     KC_NO,    KC_NO,      KC_NO,    KC_NO,    KC_NO,     KC_NO,
-        MC_2,     /*_*/      KC_TAB,          KC_NO,    KC_MS_WH_LEFT, KC_MS_WH_UP,   KC_MS_WH_RIGHT, KC_NO,       /*|*/   /**/        LCTL(KC_C),KC_NO,    KC_MS_U,   KC_NO,    LCTL(KC_V), KC_NO,    KC_NO,    KC_NO,     KC_NO,
+        MC_2,     /*_*/      KC_TAB,          KC_NO,    KC_MS_WH_LEFT, KC_MS_WH_UP,   KC_MS_WH_RIGHT, KC_NO,       /*|*/   /**/        LCTL(KC_C),KC_MS_UL, KC_MS_U,   KC_MS_UR, LCTL(KC_V), KC_NO,    KC_NO,    KC_NO,     KC_NO,
         MC_3,     /*_*/      TO_BASE,         KC_NO,    KC_MS_BTN2,    KC_MS_WH_DN,   KC_MS_BTN1,     KC_NO,       /*|*/   /**/        KC_NO,     KC_MS_L,  KC_MS_D,   KC_MS_R,  KC_NO,      KC_NO,    KC_NO,    /*_*/      KC_NO,
-        MC_4,     /*_*/      MS_A2,           KC_NO,    KC_NO,         KC_NO,         KC_NO,          KC_NO,       /*|*/   KC_NO,      KC_NO,     KC_NO,    KC_HOME,   KC_END,   KC_NO,      KC_RSFT,  KC_UP,    /*_*/
+        MC_4,     /*_*/      MS_A2,           KC_NO,    KC_NO,         KC_NO,         KC_NO,          KC_NO,       /*|*/   KC_NO,      KC_NO,     KC_MS_DL, KC_MS_D,   KC_MS_DR, KC_NO,      KC_RSFT,  KC_UP,    /*_*/
         MC_5,     KC_LCTL,   KC_LWIN,         /*_*/     KC_LALT,       KC_WBAK,       /*>*/           KC_NO,       /*|*/   KC_WFWD,     /*>*/     KC_RALT,  KC_RCTL,   /*_*/     /*_*/       KC_LEFT,  KC_DOWN,  KC_RGHT),
 };
 
@@ -154,4 +162,36 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 
     return false;
+}
+
+void press_unpress_keys(uint16_t key1, uint16_t key2, bool pressed) {
+    if (pressed) {
+        register_code(key1);
+        register_code(key2);
+    } else {
+        unregister_code(key1);
+        unregister_code(key2);
+    }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) { // This will do most of the grunt work with the keycodes.
+    case KC_MS_UL:
+        press_unpress_keys(KC_MS_U, KC_MS_L, record->event.pressed);
+        return false;
+      break;
+    case KC_MS_UR:
+        press_unpress_keys(KC_MS_U, KC_MS_R, record->event.pressed);
+        return false;
+      break;
+    case KC_MS_DL:
+        press_unpress_keys(KC_MS_D, KC_MS_L, record->event.pressed);
+        return false;
+      break;
+    case KC_MS_DR:
+        press_unpress_keys(KC_MS_D, KC_MS_R, record->event.pressed);
+        return false;
+      break;
+  }
+  return true;
 }
