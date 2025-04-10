@@ -54,6 +54,8 @@ enum custom_keycodes {
     KC_MS_DR,
 };
 
+// 52, 51 (d), s (50), 34, 35, 36,
+// 64, 65, 66
 const uint8_t led_matrix[MATRIX_ROWS][MATRIX_COLS] =
     {
         // Key Matrix to LED Index
@@ -105,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [TAHIR_UDLR] = LAYOUT_90_ansi(
         KC_NO,    /*_*/      KC_NO,           KC_NO,    KC_NO,    KC_NO,         KC_NO,      KC_NO,       /**/    KC_NO,      /*|*/      KC_NO,    KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,     KC_NO,
         MC_1,     /*_*/      KC_NO,           KC_NO,    KC_NO,    KC_NO,         KC_NO,      KC_NO,       /**/    KC_NO,      /*|*/      KC_NO,    KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,     KC_NO,
-        MC_2,     /*_*/      KC_NO,           KC_NO,    KC_NO,    KC_NO,         KC_NO,      KC_NO,       /*|*/   /**/        KC_NO,     KC_NO,    KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,     KC_NO,
+        MC_2,     /*_*/      TO_MOUSE,        KC_NO,    KC_NO,    KC_NO,         KC_NO,      KC_NO,       /*|*/   /**/        KC_NO,     KC_NO,    KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,     KC_NO,
         MC_3,     /*_*/      KC_NO,           KC_NO,    KC_NO,    KC_NO,         KC_NO,      KC_NO,       /*|*/   /**/        KC_LEFT,   KC_DOWN,  KC_UP,     KC_RIGHT, KC_NO,    KC_NO,    TO_MOUSE, /*_*/      KC_NO,
         MC_4,     /*_*/      KC_LSFT,         KC_NO,    KC_NO,    KC_NO,         KC_NO,      KC_NO,       /*|*/   KC_NO,      KC_NO,     KC_NO,    KC_HOME,   KC_END,   KC_NO,    KC_RSFT,  KC_UP,    /*_*/
         MC_5,     KC_LCTL,   KC_LWIN,         /*_*/     KC_LALT,  KC_BACKSPACE,  /*>*/       KC_NO,       /*|*/   KC_SPC,     /*>*/      KC_RALT,  KC_RCTL,   /*_*/     /*_*/     KC_LEFT,  KC_DOWN,  KC_RGHT),
@@ -115,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MC_1,     /*_*/      KC_NO,           MS_A1,    MS_A2,         MS_A3,         KC_NO,          KC_NO,       /**/    KC_NO,      /*|*/      KC_NO,    KC_NO,     KC_NO,    KC_NO,      KC_NO,    KC_NO,    KC_NO,     KC_NO,
         MC_2,     /*_*/      KC_TAB,          KC_NO,    KC_MS_WH_LEFT, KC_MS_WH_UP,   KC_MS_WH_RIGHT, KC_NO,       /*|*/   /**/        LCTL(KC_C),KC_MS_UL, KC_MS_U,   KC_MS_UR, LCTL(KC_V), KC_NO,    KC_NO,    KC_NO,     KC_NO,
         MC_3,     /*_*/      TO_BASE,         KC_NO,    KC_MS_BTN2,    KC_MS_WH_DN,   KC_MS_BTN1,     KC_NO,       /*|*/   /**/        KC_NO,     KC_MS_L,  KC_MS_D,   KC_MS_R,  KC_NO,      KC_NO,    KC_NO,    /*_*/      KC_NO,
-        MC_4,     /*_*/      MS_A2,           KC_NO,    KC_NO,         KC_NO,         KC_NO,          KC_NO,       /*|*/   KC_NO,      KC_NO,     KC_MS_DL, KC_MS_D,   KC_MS_DR, KC_NO,      KC_RSFT,  KC_UP,    /*_*/
+        MC_4,     /*_*/      MS_A2,           KC_NO,    LCTL(KC_X),    LCTL(KC_C),    LCTL(KC_V),     KC_NO,       /*|*/   KC_NO,      KC_NO,     KC_MS_DL, KC_MS_D,   KC_MS_DR, KC_NO,      KC_RSFT,  KC_UP,    /*_*/
         MC_5,     KC_LCTL,   KC_LWIN,         /*_*/     KC_LALT,       KC_WBAK,       /*>*/           KC_NO,       /*|*/   KC_WFWD,     /*>*/     KC_RALT,  KC_RCTL,   /*_*/     /*_*/       KC_LEFT,  KC_DOWN,  KC_RGHT),
 };
 
@@ -159,6 +161,15 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
         rgb_matrix_set_color(72, RGB_WHITE); // KC_COMMA
         rgb_matrix_set_color(73, RGB_WHITE); // KC_DOT
+    }
+    else if (layer_state_is(TAHIR_MOUSE)) {
+        int leds[] = { 34, 35, 36, 50, 51, 52, 64, 65, 66 };
+
+        size_t length = sizeof(leds)/sizeof(leds[0]);
+        for (size_t i = 0; i < length; i++) {
+            rgb_matrix_set_color(leds[i], RGB_WHITE);
+        }
+
     }
 
     return false;
